@@ -107,32 +107,32 @@ class Pyramid(Shape):
 class Cylinder(Circle):
     title = "Cylinder"
 
-    def __init__(self, a: int, b: int, pi=3.14):
+    def __init__(self, radius: int, height: int, pi=3.14):
         """
-        :param a: radius of base
-        :param b: height
+        :param radius: radius of base
+        :param height: height
         """
-        super().__init__(a)
-        self.b = b
+        super().__init__(radius)
+        self.height = height
         self.pi = pi
 
     @staticmethod
     def get_title() -> str:
-        return Trapezoid.title
+        return Cylinder.title
 
     @classmethod
     def get_info(cls) -> str:
-        return f"Figure {Trapezoid.get_title()}. To initialize please insert radius a and height b and pi [optional]"
-               f"\nMethods:\n\t[*] Area;\n\t[*] Height;\n\t[*] Volume;\n\t[*] Info; \n\t[*] Title."
+        return f"Figure {Cylinder.get_title()}. To initialize please insert radius a and height b and pi" \
+               f" [optional]\nMethods:\n\t[*] Area;\n\t[*] Height;\n\t[*] Volume;\n\t[*] Info; \n\t[*] Title."
 
     def get_area(self) -> float:
-        return (2 * self.pi * self.side_size**2) + 2 * self.pi * self.side_size * self.b
+        return (2 * self.pi * self.side_size**2) + 2 * self.pi * self.side_size * self.height
 
     def get_height(self) -> float:
-        return self.b
+        return self.height
 
     def get_volume(self) -> float:
-        return self.pi * self.side_size**2 * self.b
+        return self.pi * self.side_size**2 * self.height
 
 
 class Cone(Shape):
