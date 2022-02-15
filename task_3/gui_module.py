@@ -215,6 +215,6 @@ class MyGUI(tk.Tk):
         return [method for method in dir(class_name) if not method.startswith('__')]
 
 
-app = MyGUI()
-app.title("Geometric calculator")
-app.mainloop()
+# app = MyGUI()
+# app.title("Geometric calculator")
+# app.mainloop()

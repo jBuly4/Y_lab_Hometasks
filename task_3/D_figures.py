@@ -103,6 +103,9 @@ class Pyramid(Shape):
     def get_height(self) -> int:
         return self.height
 
+    def get_base(self):
+        return self.side_size, self.b
+
 
 class Cylinder(Circle):
     title = "Cylinder"
@@ -157,3 +160,9 @@ class Cone(Shape):
 
     def get_volume(self) -> int:
         return  self.get_area() * self.height / 3
+
+    def get_radius(self):
+        return self.side_size
+
+    def get_height(self):
+        return self.height

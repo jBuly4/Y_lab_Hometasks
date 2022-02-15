@@ -112,7 +112,7 @@ class My_3D_GUI(tk.Tk):
             sizes.pack(fill="x", side="left", pady=5, padx=5)
 
     def calculate_n_draw(self, event, sizes, text, win):
-        x_centre = y_centre = 300 / 2
+        """Make calculations and draw figures."""
         canvas_frame = tk.Frame(win)
         canvas_frame.pack()
         canvas = tk.Canvas(canvas_frame)
@@ -123,9 +123,8 @@ class My_3D_GUI(tk.Tk):
                 sphere = Sphere(int(sizes.get()))
                 lb_res = tk.Label(win, text=f"Area {sphere.get_area()}\nDiameter {sphere.get_diameter()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_oval(x_centre - sphere.get_diameter() / 2, y_centre - sphere.get_diameter() / 2,
-                                   x_centre + sphere.get_diameter() / 2, y_centre + sphere.get_diameter() / 2,
-                                   fill="red", outline="black")
+                self.draw_figure(canvas, sphere)
+
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
@@ -135,9 +134,7 @@ class My_3D_GUI(tk.Tk):
                 cube = Cube(int(sizes.get()))
                 lb_res = tk.Label(win, text=f"Area {cube.get_area()}\nPerimeter {cube.get_perimeter()}\n", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_rectangle(x_centre - cube.get_perimeter() / 8, y_centre - cube.get_perimeter() / 8,
-                                        x_centre + cube.get_perimeter() / 8, y_centre + cube.get_perimeter() / 8,
-                                        fill="red", outline="black")
+                self.draw_figure(canvas, cube)
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
@@ -149,9 +146,7 @@ class My_3D_GUI(tk.Tk):
                 lb_res = tk.Label(win, text=f"Area {parallelepiped.get_area()}\nPerimeter {parallelepiped.get_perimeter()}\n"
                                             f"Diagonal {parallelepiped.get_diagonal()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_rectangle(x_centre - x / 2, y_centre - y / 2,
-                                        x_centre + x / 2, y_centre + y / 2,
-                                        fill="red", outline="black")
+                self.draw_figure(canvas, parallelepiped)
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
@@ -160,14 +155,10 @@ class My_3D_GUI(tk.Tk):
             try:
                 a, b, c = map(int, sizes.get().split())
                 pyramid = Pyramid(a, b, c)
-                lb_res = tk.Label(win, text=f"Area {pyramid.get_area()}" \
+                lb_res = tk.Label(win, text=f"Area {pyramid.get_area()}\n" \
                                             f"Heigt {pyramid.get_height()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_line(x_centre - a / 2, y_centre - pyramid.get_height(),
-                                   x_centre + a / 2, y_centre - pyramid.get_height(),
-                                   x_centre, y_centre,
-                                   x_centre - a / 2, y_centre - pyramid.get_height(),
-                                   fill="red")
+                self.draw_figure(canvas, pyramid)
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error or Wrong sides!")
                 lb_err.pack()
@@ -179,12 +170,7 @@ class My_3D_GUI(tk.Tk):
                 lb_res = tk.Label(win, text=f"Area {cylinder.get_area()}\nVolume {cylinder.get_volume()}" \
                                             f"Height {cylinder.get_height()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_line(x_centre - a / 2, y_centre - trapezoid.get_height(),
-                                   x_centre + a / 2, y_centre - trapezoid.get_height(),
-                                   x_centre + b / 2, y_centre,
-                                   x_centre - b / 2, y_centre,
-                                   x_centre - a / 2, y_centre - trapezoid.get_height(),
-                                   fill="red")
+                self.draw_figure(canvas, cylinder)
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
@@ -193,15 +179,9 @@ class My_3D_GUI(tk.Tk):
             try:
                 a, height = map(int, sizes.get().split())
                 cone = Cone(a, height)
-                lb_res = tk.Label(win, text=f"Area {cone.get_area()}\nVolume {cone.get_volume()t()}\n", bg="white")
+                lb_res = tk.Label(win, text=f"Area {cone.get_area()}\nVolume {cone.get_volume()}\n", bg="white")
                 lb_res.pack(side="bottom")
-                d1, d2 = rhomb.get_diagonals()
-                canvas.create_line(x_centre - d2 / 2, y_centre,
-                                   x_centre, y_centre - d1 / 2,
-                                   x_centre + d2 / 2, y_centre,
-                                   x_centre, y_centre + d1 / 2,
-                                   x_centre - d2 / 2, y_centre,
-                                   fill="red")
+                self.draw_figure(canvas, cone)
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
@@ -209,7 +189,156 @@ class My_3D_GUI(tk.Tk):
     def get_lst_methods(self, class_name):
         return [method for method in dir(class_name) if not method.startswith('__')]
 
+    def draw_figure(self, canvas, instance):
+        x_centre = y_centre = 300 / 2
+        if instance.get_title() == Cube.get_title():
+            canvas.create_rectangle(0.9 * (x_centre - instance.get_perimeter() / 12),
+                                    0.9 * (y_centre - instance.get_perimeter() / 12),
+                                    0.9 * (x_centre + instance.get_perimeter() / 12),
+                                    0.9 * (y_centre + instance.get_perimeter() / 12),
+                                    outline="black")
+            canvas.create_line(0.9 * (x_centre - instance.get_perimeter() / 12),
+                               0.9 * (y_centre - instance.get_perimeter() / 12),
+                               x_centre - instance.get_perimeter() / 12 + 20,
+                               y_centre - instance.get_perimeter() / 12 + 20)
+            canvas.create_line(0.9 * (x_centre - instance.get_perimeter() / 12),
+                               0.9 * (y_centre + instance.get_perimeter() / 12),
+                               x_centre - instance.get_perimeter() / 12 + 20,
+                               y_centre + instance.get_perimeter() / 12 + 20)
+            canvas.create_line(0.9 * (x_centre + instance.get_perimeter() / 12),
+                               0.9 * (y_centre - instance.get_perimeter() / 12),
+                               x_centre + instance.get_perimeter() / 12 + 20,
+                               y_centre - instance.get_perimeter() / 12 + 20)
+            canvas.create_line(0.9 * (x_centre + instance.get_perimeter() / 12),
+                               0.9 * (y_centre + instance.get_perimeter() / 12),
+                               x_centre + instance.get_perimeter() / 12 + 20,
+                               y_centre + instance.get_perimeter() / 12 + 20,
+                               dash=(10, 10))
+            canvas.create_rectangle(x_centre - instance.get_perimeter() / 12 + 20,
+                                    y_centre - instance.get_perimeter() / 12 + 20,
+                                    x_centre + instance.get_perimeter() / 12 + 20,
+                                    y_centre + instance.get_perimeter() / 12 + 20,
+                                    outline="black")
 
-app = My_3D_GUI()
-app.title("Geometric calculator")
-app.mainloop()
+        elif instance.get_title() == Parallelepiped.get_title():
+            canvas.create_rectangle(0.9 * (x_centre - instance.get_perimeter() / 12),
+                                    0.9 * (y_centre - instance.get_perimeter() / 12),
+                                    0.9 * (x_centre + instance.get_perimeter() / 12),
+                                    0.9 * (y_centre + instance.get_perimeter() / 12),
+                                    outline="black")
+            canvas.create_line(0.9 * (x_centre - instance.get_perimeter() / 12),
+                               0.9 * (y_centre - instance.get_perimeter() / 12),
+                               x_centre - instance.get_perimeter() / 12 + instance.z,
+                               y_centre - instance.get_perimeter() / 12 + instance.z)
+            canvas.create_line(0.9 * (x_centre - instance.get_perimeter() / 12),
+                               0.9 * (y_centre + instance.get_perimeter() / 12),
+                               x_centre - instance.get_perimeter() / 12 + instance.z,
+                               y_centre + instance.get_perimeter() / 12 + instance.z)
+            canvas.create_line(0.9 * (x_centre + instance.get_perimeter() / 12),
+                               0.9 * (y_centre - instance.get_perimeter() / 12),
+                               x_centre + instance.get_perimeter() / 12 + instance.z,
+                               y_centre - instance.get_perimeter() / 12 + instance.z)
+            canvas.create_line(0.9 * (x_centre + instance.get_perimeter() / 12),
+                               0.9 * (y_centre + instance.get_perimeter() / 12),
+                               x_centre + instance.get_perimeter() / 12 + instance.z,
+                               y_centre + instance.get_perimeter() / 12 + instance.z,
+                               dash=(10, 10))
+            canvas.create_rectangle(x_centre - instance.get_perimeter() / 12 + instance.z,
+                                    y_centre - instance.get_perimeter() / 12 + instance.z,
+                                    x_centre + instance.get_perimeter() / 12 + instance.z,
+                                    y_centre + instance.get_perimeter() / 12 + instance.z,
+                                    outline="black")
+
+        elif instance.get_title() == Pyramid.get_title():
+            canvas.create_line(0.9 * (x_centre - instance.get_base()[0]/2),
+                               0.9 * (y_centre - instance.get_base()[1]/2),
+                               0.9 * (x_centre + instance.get_base()[0] / 2),
+                               0.9 * (y_centre - instance.get_base()[1] / 2),
+                               x_centre + instance.get_base()[0] / 2,
+                               y_centre + instance.get_base()[1] / 2,
+                               dash=(5, 5)
+                               )
+            canvas.create_line(x_centre + instance.get_base()[0] / 2,
+                               y_centre + instance.get_base()[1] / 2,
+                               x_centre - instance.get_base()[0] / 2,
+                               y_centre + instance.get_base()[1] / 2,
+                               0.9 * (x_centre - instance.get_base()[0] / 2),
+                               0.9 * (y_centre - instance.get_base()[1] / 2),
+                               )
+
+            canvas.create_line(x_centre, y_centre - instance.get_height(),
+                               0.9 * (x_centre - instance.get_base()[0]/2),
+                               0.9 * (y_centre - instance.get_base()[1]/2),)
+
+            canvas.create_line(x_centre, y_centre - instance.get_height(),
+                               0.9 * (x_centre + instance.get_base()[0] / 2),
+                               0.9 * (y_centre - instance.get_base()[1] / 2), dash=(10, 10))
+
+            canvas.create_line(x_centre, y_centre - instance.get_height(),
+                               x_centre + instance.get_base()[0] / 2,
+                               y_centre + instance.get_base()[1] / 2, )
+
+            canvas.create_line(x_centre, y_centre - instance.get_height(),
+                               x_centre - instance.get_base()[0] / 2,
+                               y_centre + instance.get_base()[1] / 2,)
+
+        elif instance.get_title() == Cylinder.get_title():
+            canvas.create_arc(x_centre - instance.get_diameter() / 2, y_centre - 20,
+                              x_centre + instance.get_diameter() / 2, y_centre + 20,
+                              outline="black", start=0, extent=180, )
+            canvas.create_arc(x_centre - instance.get_diameter() / 2, y_centre - 20,
+                              x_centre + instance.get_diameter() / 2, y_centre + 20,
+                              outline="black", start=180, extent=180, )
+            canvas.create_arc(x_centre - instance.get_diameter() / 2,
+                              y_centre - 20 + instance.get_height(),
+                              x_centre + instance.get_diameter() / 2,
+                              y_centre + 20 + instance.get_height(),
+                              outline="black", start=0, extent=180, dash=(10, 10))
+            canvas.create_arc(x_centre - instance.get_diameter() / 2,
+                              y_centre - 20 + instance.get_height(),
+                              x_centre + instance.get_diameter() / 2,
+                              y_centre + 20 + instance.get_height(),
+                              outline="black", start=180, extent=180, )
+            canvas.create_line(x_centre - instance.get_diameter() / 2,
+                               y_centre + instance.get_height(),
+                               x_centre - instance.get_diameter() / 2, y_centre)
+            canvas.create_line(x_centre + instance.get_diameter() / 2,
+                               y_centre + instance.get_height(),
+                               x_centre + instance.get_diameter() / 2, y_centre)
+
+        elif instance.get_title() == Sphere.get_title():
+            canvas.create_arc(x_centre - instance.get_diameter() / 2,
+                              y_centre - instance.get_diameter() / 2,
+                              x_centre + instance.get_diameter() / 2,
+                              y_centre + instance.get_diameter() / 2,
+                              fill="red", outline="black", start=0, extent=180)
+            canvas.create_arc(x_centre - instance.get_diameter() / 2,
+                              y_centre - instance.get_diameter() / 2,
+                              x_centre + instance.get_diameter() / 2,
+                              y_centre + instance.get_diameter() / 2,
+                              fill="red", outline="black", start=180, extent=180)
+            canvas.create_arc(x_centre - instance.get_diameter() / 2, y_centre - 20,
+                              x_centre + instance.get_diameter() / 2, y_centre + 20,
+                              fill="red", outline="black", start=0, extent=180, dash=(10, 10))
+            canvas.create_arc(x_centre - instance.get_diameter() / 2, y_centre - 20,
+                              x_centre + instance.get_diameter() / 2, y_centre + 20,
+                              fill="red", outline="black", start=180, extent=180)
+
+        else:
+            canvas.create_arc(x_centre - instance.get_radius(), y_centre - 20,
+                              x_centre + instance.get_radius(), y_centre + 20,
+                              outline="black", start=0, extent=180, dash=(10, 10))
+            canvas.create_arc(x_centre - instance.get_radius(), y_centre - 20,
+                              x_centre + instance.get_radius(), y_centre + 20,
+                              outline="black", start=180, extent=180,)
+            canvas.create_line(x_centre, y_centre - instance.get_height(), x_centre - instance.get_radius(), y_centre)
+            canvas.create_line(x_centre, y_centre - instance.get_height(), x_centre + instance.get_radius(), y_centre)
+
+
+
+
+
+
+# app = My_3D_GUI()
+# app.title("Geometric calculator")
+# app.mainloop()
