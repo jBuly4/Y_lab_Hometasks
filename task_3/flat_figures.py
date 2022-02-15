@@ -79,13 +79,13 @@ class Rectangle(Square):
         return 2 * self.side_size + 2 * self.other_side_size
 
     def get_diagonal(self) -> float:
-        return (self.side_size + self.other_side_size)**0.5
+        return (self.side_size**2 + self.other_side_size**2)**0.5
 
 
 class Triangle(Shape):
     title = "Triangle"
 
-    def __init__(self, a: int, b:int, c:int):
+    def __init__(self, a: int, b: int, c: int):
         super().__init__(a)
         self.b = b
         self.c = c
@@ -102,9 +102,9 @@ class Triangle(Shape):
                f"[*] Height based on a;\n\t[*] Info; \n\t[*] Title."
 
     def get_area(self) -> float:
-        return (self.half_perim *\
-                (self.half_perim - self.side_size) * \
-                (self.half_perim - self.b) * \
+        return (self.half_perim *
+                (self.half_perim - self.side_size) *
+                (self.half_perim - self.b) *
                 (self.half_perim - self.c))**0.5
 
     def get_perimeter(self) -> int:
@@ -176,7 +176,3 @@ class Rhombus(Shape):
         diag_1 = self.side_size * (2 + 2 * cos(self.angle))**0.5
         diag_2 = self.side_size * (2 - 2 * cos(self.other_angle))**0.5
         return diag_1, diag_2
-
-rhomb = Rhombus(10, 50)
-method_lst = [method for method in dir(Rhombus) if not method.startswith('__')]
-# print(method_lst)

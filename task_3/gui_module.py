@@ -6,8 +6,7 @@ btn_names_main = [class_name.get_title() for class_name in [Circle, Square, Rect
 
 
 class MyGUI(tk.Tk):
-    count = 0
-
+    """Class for processing flat figures"""
     def __init__(self):
         super().__init__()
         self.btns = [self.create_btn(text) for text in btn_names_main]
@@ -122,11 +121,11 @@ class MyGUI(tk.Tk):
         if text == Circle.get_title():
             try:
                 circle = Circle(int(sizes.get()))
-                lb_res = tk.Label(win, text=f"Area {circle.get_area()}\nPerimeter {circle.get_perimeter()}\n" \
+                lb_res = tk.Label(win, text=f"Area {circle.get_area()}\nPerimeter {circle.get_perimeter()}\n"
                                             f"Diameter {circle.get_diameter()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_oval(x_centre - circle.get_diameter() / 2, y_centre - circle.get_diameter() / 2, \
-                                   x_centre + circle.get_diameter() / 2, y_centre + circle.get_diameter() / 2, \
+                canvas.create_oval(x_centre - circle.get_diameter() / 2, y_centre - circle.get_diameter() / 2,
+                                   x_centre + circle.get_diameter() / 2, y_centre + circle.get_diameter() / 2,
                                    fill="red", outline="black")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
@@ -138,8 +137,8 @@ class MyGUI(tk.Tk):
                 lb_res = tk.Label(win, text=f"Area {square.get_area()}\nPerimeter {square.get_perimeter()}\n" \
                                             f"Diagonal {square.get_diagonal()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_rectangle(x_centre - square.get_perimeter() / 8, y_centre - square.get_perimeter() / 8, \
-                                        x_centre + square.get_perimeter() / 8, y_centre + square.get_perimeter() / 8, \
+                canvas.create_rectangle(x_centre - square.get_perimeter() / 8, y_centre - square.get_perimeter() / 8,
+                                        x_centre + square.get_perimeter() / 8, y_centre + square.get_perimeter() / 8,
                                         fill="red", outline="black")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
@@ -149,11 +148,11 @@ class MyGUI(tk.Tk):
             try:
                 x, y = map(int, sizes.get().split())
                 rectangle = Rectangle(x, y)
-                lb_res = tk.Label(win, text=f"Area {rectangle.get_area()}\nPerimeter {rectangle.get_perimeter()}\n" \
+                lb_res = tk.Label(win, text=f"Area {rectangle.get_area()}\nPerimeter {rectangle.get_perimeter()}\n"
                                             f"Diagonal {rectangle.get_diagonal()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_rectangle(x_centre - x / 2, y_centre - y / 2, \
-                                        x_centre + x / 2, y_centre + y / 2, \
+                canvas.create_rectangle(x_centre - x / 2, y_centre - y / 2,
+                                        x_centre + x / 2, y_centre + y / 2,
                                         fill="red", outline="black")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
@@ -168,10 +167,10 @@ class MyGUI(tk.Tk):
                 lb_res = tk.Label(win, text=f"Area {triangle.get_area()}\nPerimeter {triangle.get_perimeter()}\n" \
                                             f"Heigt {triangle.get_height()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_line(x_centre - a / 2, y_centre - triangle.get_height(), \
-                                   x_centre + a / 2, y_centre - triangle.get_height(), \
-                                   x_centre, y_centre, \
-                                   x_centre - a / 2, y_centre - triangle.get_height(), \
+                canvas.create_line(x_centre - a / 2, y_centre - triangle.get_height(),
+                                   x_centre + a / 2, y_centre - triangle.get_height(),
+                                   x_centre, y_centre,
+                                   x_centre - a / 2, y_centre - triangle.get_height(),
                                    fill="red")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error or Wrong sides!")
@@ -184,11 +183,11 @@ class MyGUI(tk.Tk):
                 lb_res = tk.Label(win, text=f"Area {trapezoid.get_area()}\nPerimeter {trapezoid.get_perimeter()}\n" \
                                             f"Heigt {trapezoid.get_height()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_line(x_centre - a / 2, y_centre - trapezoid.get_height(), \
-                                   x_centre + a / 2, y_centre - trapezoid.get_height(), \
-                                   x_centre + b / 2, y_centre, \
-                                   x_centre - b / 2, y_centre, \
-                                   x_centre - a / 2, y_centre - trapezoid.get_height(), \
+                canvas.create_line(x_centre - a / 2, y_centre - trapezoid.get_height(),
+                                   x_centre + a / 2, y_centre - trapezoid.get_height(),
+                                   x_centre + b / 2, y_centre,
+                                   x_centre - b / 2, y_centre,
+                                   x_centre - a / 2, y_centre - trapezoid.get_height(),
                                    fill="red")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
@@ -198,15 +197,15 @@ class MyGUI(tk.Tk):
             try:
                 a, angle = map(int, sizes.get().split())
                 rhomb = Rhombus(a, angle)
-                lb_res = tk.Label(win, text=f"Area {rhomb.get_area()}\nPerimeter {rhomb.get_perimeter()}\n" \
+                lb_res = tk.Label(win, text=f"Area {rhomb.get_area()}\nPerimeter {rhomb.get_perimeter()}\n"
                                             f"Diagonals {rhomb.get_diagonals()}", bg="white")
                 lb_res.pack(side="bottom")
                 d1, d2 = rhomb.get_diagonals()
-                canvas.create_line(x_centre - d2 / 2, y_centre, \
-                                   x_centre, y_centre - d1 / 2, \
-                                   x_centre + d2 / 2, y_centre, \
-                                   x_centre, y_centre + d1 / 2, \
-                                   x_centre - d2 / 2, y_centre, \
+                canvas.create_line(x_centre - d2 / 2, y_centre,
+                                   x_centre, y_centre - d1 / 2,
+                                   x_centre + d2 / 2, y_centre,
+                                   x_centre, y_centre + d1 / 2,
+                                   x_centre - d2 / 2, y_centre,
                                    fill="red")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
