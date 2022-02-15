@@ -78,15 +78,15 @@ class Parallelepiped(Cube):
 class Pyramid(Shape):
     title = "Pyramid"
 
-    def __init__(self, a: int, b: int, c: int):
+    def __init__(self, a: int, b: int, height: int):
         """
         :param a: side of pyramid base
         :param b: side of pyramid base
-        :param c: height
+        :param height: height
         """
         super().__init__(a)
         self.b = b
-        self.c = c
+        self.height = height
 
     @staticmethod
     def get_title() -> str:
@@ -101,7 +101,7 @@ class Pyramid(Shape):
         return self.side_size * self.b
 
     def get_height(self) -> int:
-        return self.c
+        return self.height
 
 
 class Cylinder(Circle):

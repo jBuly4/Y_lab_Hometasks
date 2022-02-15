@@ -11,8 +11,8 @@ class MyGUI(tk.Tk):
         super().__init__()
         self.btns = [self.create_btn(text) for text in btn_names_main]
 
-        self.btn_Circle, self.btn_Square, self.btn_Rectangle, \
-        self.btn_Triangle, self.btn_Trapezoid, self.Rhombus = self.btns
+        # self.btn_Circle, self.btn_Square, self.btn_Rectangle, \
+        # self.btn_Triangle, self.btn_Trapezoid, self.Rhombus = self.btns
 
         for btn in self.btns:
             btn.pack()

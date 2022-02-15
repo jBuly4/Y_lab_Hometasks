@@ -1,18 +1,15 @@
 import tkinter as tk
 
-from D_figures import Sphere, Cube
+from D_figures import Sphere, Cube, Parallelepiped, Pyramid, Cylinder, Cone
 
-btn_names_main = [class_name.get_title() for class_name in [Circle, Square, Rectangle, Triangle, Trapezoid, Rhombus]]
+btn_names_main = [class_name.get_title() for class_name in [Sphere, Cube, Parallelepiped, Pyramid, Cylinder, Cone]]
 
 
-class MyGUI(tk.Tk):
-    """Class for processing flat figures"""
+class My_3D_GUI(tk.Tk):
+    """Class for processing 3D figures"""
     def __init__(self):
         super().__init__()
         self.btns = [self.create_btn(text) for text in btn_names_main]
-
-        self.btn_Circle, self.btn_Square, self.btn_Rectangle, \
-        self.btn_Triangle, self.btn_Trapezoid, self.Rhombus = self.btns
 
         for btn in self.btns:
             btn.pack()
@@ -44,8 +41,8 @@ class MyGUI(tk.Tk):
 
         btn.bind("<Button-1>", lambda event: self.calculate_n_draw(event, sizes, text, win))
 
-        if text == Circle.get_title():
-            method_lst = self.get_lst_methods(Circle)
+        if text == Sphere.get_title():
+            method_lst = self.get_lst_methods(Sphere)
             for method in method_lst:
                 lb.insert(indx, method)
                 indx += 1
@@ -55,8 +52,8 @@ class MyGUI(tk.Tk):
             sizes = tk.Entry(frame_2, width=21)
             sizes.pack(fill="x", side="left", pady=5, padx=5)
 
-        elif text == Square.get_title():
-            method_lst = self.get_lst_methods(Square)
+        elif text == Cube.get_title():
+            method_lst = self.get_lst_methods(Cube)
             for method in method_lst:
                 lb.insert(indx, method)
                 indx += 1
@@ -66,46 +63,49 @@ class MyGUI(tk.Tk):
             sizes = tk.Entry(frame_2, width=21)
             sizes.pack(fill="x", side="left", pady=5, padx=5)
 
-        elif text == Rectangle.get_title():
-            method_lst = self.get_lst_methods(Rectangle)
+        elif text == Parallelepiped.get_title():
+            method_lst = self.get_lst_methods(Parallelepiped)
             for method in method_lst:
                 lb.insert(indx, method)
                 indx += 1
 
-            label_sizes = tk.Label(frame_2, text=f"Insert side 1\n and side 2 of {text}\n with space ", width=19)
+            label_sizes = tk.Label(frame_2, text=f"Insert side 1\n and side 2\nand side 3 of {text}\n with space ",
+                                   width=19)
             label_sizes.pack(side="left", pady=5, padx=5)
             sizes = tk.Entry(frame_2, width=21)
             sizes.pack(fill="x", side="left", pady=5, padx=5)
 
-        elif text == Triangle.get_title():
-            method_lst = self.get_lst_methods(Triangle)
+        elif text == Pyramid.get_title():
+            method_lst = self.get_lst_methods(Pyramid)
             for method in method_lst:
                 lb.insert(indx, method)
                 indx += 1
 
-            label_sizes = tk.Label(frame_2, text=f"Insert side a, b\n and side c of {text}\n with space ", width=19)
+            label_sizes = tk.Label(frame_2, text=f"Insert base sides a, b\n and height c of {text}\n with space ",
+                                   width=19)
             label_sizes.pack(side="left", pady=5, padx=5)
             sizes = tk.Entry(frame_2, width=21)
             sizes.pack(fill="x", side="left", pady=5, padx=5)
 
-        elif text == Trapezoid.get_title():
-            method_lst = self.get_lst_methods(Trapezoid)
+        elif text == Cylinder.get_title():
+            method_lst = self.get_lst_methods(Cylinder)
             for method in method_lst:
                 lb.insert(indx, method)
                 indx += 1
 
-            label_sizes = tk.Label(frame_2, text=f"Insert side a, b\n and c, d of {text}\n with space ", width=19)
+            label_sizes = tk.Label(frame_2, text=f"Insert radius a\n and height b of {text}\n with space ",
+                                   width=19)
             label_sizes.pack(side="left", pady=5, padx=5)
             sizes = tk.Entry(frame_2, width=21)
             sizes.pack(fill="x", side="left", pady=5, padx=5)
 
-        elif text == Rhombus.get_title():
-            method_lst = self.get_lst_methods(Rhombus)
+        elif text == Cone.get_title():
+            method_lst = self.get_lst_methods(Cone)
             for method in method_lst:
                 lb.insert(indx, method)
                 indx += 1
 
-            label_sizes = tk.Label(frame_2, text=f"Insert side a\n and one angle in degrees for {text}\n with space ",
+            label_sizes = tk.Label(frame_2, text=f"Insert radius a\n and height b of {text}\n with space ",
                                    width=19)
             label_sizes.pack(side="left", pady=5, padx=5)
             sizes = tk.Entry(frame_2, width=21)
@@ -118,38 +118,36 @@ class MyGUI(tk.Tk):
         canvas = tk.Canvas(canvas_frame)
         canvas.pack(fill="x")
 
-        if text == Circle.get_title():
+        if text == Sphere.get_title():
             try:
-                circle = Circle(int(sizes.get()))
-                lb_res = tk.Label(win, text=f"Area {circle.get_area()}\nPerimeter {circle.get_perimeter()}\n"
-                                            f"Diameter {circle.get_diameter()}", bg="white")
+                sphere = Sphere(int(sizes.get()))
+                lb_res = tk.Label(win, text=f"Area {sphere.get_area()}\nDiameter {sphere.get_diameter()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_oval(x_centre - circle.get_diameter() / 2, y_centre - circle.get_diameter() / 2,
-                                   x_centre + circle.get_diameter() / 2, y_centre + circle.get_diameter() / 2,
+                canvas.create_oval(x_centre - sphere.get_diameter() / 2, y_centre - sphere.get_diameter() / 2,
+                                   x_centre + sphere.get_diameter() / 2, y_centre + sphere.get_diameter() / 2,
                                    fill="red", outline="black")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
 
-        elif text == Square.get_title():
+        elif text == Cube.get_title():
             try:
-                square = Square(int(sizes.get()))
-                lb_res = tk.Label(win, text=f"Area {square.get_area()}\nPerimeter {square.get_perimeter()}\n" \
-                                            f"Diagonal {square.get_diagonal()}", bg="white")
+                cube = Cube(int(sizes.get()))
+                lb_res = tk.Label(win, text=f"Area {cube.get_area()}\nPerimeter {cube.get_perimeter()}\n", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_rectangle(x_centre - square.get_perimeter() / 8, y_centre - square.get_perimeter() / 8,
-                                        x_centre + square.get_perimeter() / 8, y_centre + square.get_perimeter() / 8,
+                canvas.create_rectangle(x_centre - cube.get_perimeter() / 8, y_centre - cube.get_perimeter() / 8,
+                                        x_centre + cube.get_perimeter() / 8, y_centre + cube.get_perimeter() / 8,
                                         fill="red", outline="black")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
 
-        elif text == Rectangle.get_title():
+        elif text == Parallelepiped.get_title():
             try:
-                x, y = map(int, sizes.get().split())
-                rectangle = Rectangle(x, y)
-                lb_res = tk.Label(win, text=f"Area {rectangle.get_area()}\nPerimeter {rectangle.get_perimeter()}\n"
-                                            f"Diagonal {rectangle.get_diagonal()}", bg="white")
+                x, y, z = map(int, sizes.get().split())
+                parallelepiped = Parallelepiped(x, y, z)
+                lb_res = tk.Label(win, text=f"Area {parallelepiped.get_area()}\nPerimeter {parallelepiped.get_perimeter()}\n"
+                                            f"Diagonal {parallelepiped.get_diagonal()}", bg="white")
                 lb_res.pack(side="bottom")
                 canvas.create_rectangle(x_centre - x / 2, y_centre - y / 2,
                                         x_centre + x / 2, y_centre + y / 2,
@@ -158,30 +156,28 @@ class MyGUI(tk.Tk):
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
 
-        elif text == Triangle.get_title():
+        elif text == Pyramid.get_title():
             try:
                 a, b, c = map(int, sizes.get().split())
-                if not (a + b) >= c and (c + b) >= a and (a + c) >= b:
-                    raise ValueError
-                triangle = Triangle(a, b, c)
-                lb_res = tk.Label(win, text=f"Area {triangle.get_area()}\nPerimeter {triangle.get_perimeter()}\n" \
-                                            f"Heigt {triangle.get_height()}", bg="white")
+                pyramid = Pyramid(a, b, c)
+                lb_res = tk.Label(win, text=f"Area {pyramid.get_area()}" \
+                                            f"Heigt {pyramid.get_height()}", bg="white")
                 lb_res.pack(side="bottom")
-                canvas.create_line(x_centre - a / 2, y_centre - triangle.get_height(),
-                                   x_centre + a / 2, y_centre - triangle.get_height(),
+                canvas.create_line(x_centre - a / 2, y_centre - pyramid.get_height(),
+                                   x_centre + a / 2, y_centre - pyramid.get_height(),
                                    x_centre, y_centre,
-                                   x_centre - a / 2, y_centre - triangle.get_height(),
+                                   x_centre - a / 2, y_centre - pyramid.get_height(),
                                    fill="red")
             except ValueError:
                 lb_err = tk.Label(win, text=f"Value Error or Wrong sides!")
                 lb_err.pack()
 
-        elif text == Trapezoid.get_title():
+        elif text == Cylinder.get_title():
             try:
-                a, b, c, d = map(int, sizes.get().split())
-                trapezoid = Trapezoid(a, b, c, d)
-                lb_res = tk.Label(win, text=f"Area {trapezoid.get_area()}\nPerimeter {trapezoid.get_perimeter()}\n" \
-                                            f"Heigt {trapezoid.get_height()}", bg="white")
+                a, b = map(int, sizes.get().split())
+                cylinder = Cylinder(a, b)
+                lb_res = tk.Label(win, text=f"Area {cylinder.get_area()}\nVolume {cylinder.get_volume()}" \
+                                            f"Height {cylinder.get_height()}", bg="white")
                 lb_res.pack(side="bottom")
                 canvas.create_line(x_centre - a / 2, y_centre - trapezoid.get_height(),
                                    x_centre + a / 2, y_centre - trapezoid.get_height(),
@@ -193,12 +189,11 @@ class MyGUI(tk.Tk):
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
 
-        elif text == Rhombus.get_title():
+        elif text == Cone.get_title():
             try:
-                a, angle = map(int, sizes.get().split())
-                rhomb = Rhombus(a, angle)
-                lb_res = tk.Label(win, text=f"Area {rhomb.get_area()}\nPerimeter {rhomb.get_perimeter()}\n"
-                                            f"Diagonals {rhomb.get_diagonals()}", bg="white")
+                a, height = map(int, sizes.get().split())
+                cone = Cone(a, height)
+                lb_res = tk.Label(win, text=f"Area {cone.get_area()}\nVolume {cone.get_volume()t()}\n", bg="white")
                 lb_res.pack(side="bottom")
                 d1, d2 = rhomb.get_diagonals()
                 canvas.create_line(x_centre - d2 / 2, y_centre,
@@ -215,6 +210,6 @@ class MyGUI(tk.Tk):
         return [method for method in dir(class_name) if not method.startswith('__')]
 
 
-app = MyGUI()
+app = My_3D_GUI()
 app.title("Geometric calculator")
 app.mainloop()
