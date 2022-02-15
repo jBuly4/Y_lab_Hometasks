@@ -186,10 +186,13 @@ class My_3D_GUI(tk.Tk):
                 lb_err = tk.Label(win, text=f"Value Error!")
                 lb_err.pack()
 
-    def get_lst_methods(self, class_name):
+    @staticmethod
+    def get_lst_methods(class_name) -> list:
+        """Returns list of method for a Class."""
         return [method for method in dir(class_name) if not method.startswith('__')]
 
     def draw_figure(self, canvas, instance):
+        """Draw all figures depending on instance."""
         x_centre = y_centre = 300 / 2
         if instance.get_title() == Cube.get_title():
             canvas.create_rectangle(0.9 * (x_centre - instance.get_perimeter() / 12),
@@ -334,11 +337,3 @@ class My_3D_GUI(tk.Tk):
             canvas.create_line(x_centre, y_centre - instance.get_height(), x_centre - instance.get_radius(), y_centre)
             canvas.create_line(x_centre, y_centre - instance.get_height(), x_centre + instance.get_radius(), y_centre)
 
-
-
-
-
-
-# app = My_3D_GUI()
-# app.title("Geometric calculator")
-# app.mainloop()

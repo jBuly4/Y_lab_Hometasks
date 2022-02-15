@@ -20,7 +20,7 @@ class Circle(Shape):
                f"[*] Diameter;\n\t[*] Info; \n\t[*] Title."
 
     def get_area(self) -> float:
-        return self.pi * self.side_size**2
+        return self.pi * self.side_size ** 2
 
     def get_perimeter(self) -> float:
         return 2 * self.pi * self.side_size
@@ -46,13 +46,13 @@ class Square(Shape):
                f"[*] Diagonal;\n\t[*] Info; \n\t[*] Title."
 
     def get_area(self) -> int:
-        return self.side_size**2
+        return self.side_size ** 2
 
     def get_perimeter(self) -> int:
         return 4 * self.side_size
 
     def get_diagonal(self) -> float:
-        return self.side_size * (2**0.5)
+        return self.side_size * (2 ** 0.5)
 
 
 class Rectangle(Square):
@@ -79,7 +79,7 @@ class Rectangle(Square):
         return 2 * self.side_size + 2 * self.other_side_size
 
     def get_diagonal(self) -> float:
-        return (self.side_size**2 + self.other_side_size**2)**0.5
+        return (self.side_size ** 2 + self.other_side_size ** 2) ** 0.5
 
 
 class Triangle(Shape):
@@ -105,7 +105,7 @@ class Triangle(Shape):
         return (self.half_perim *
                 (self.half_perim - self.side_size) *
                 (self.half_perim - self.b) *
-                (self.half_perim - self.c))**0.5
+                (self.half_perim - self.c)) ** 0.5
 
     def get_perimeter(self) -> int:
         return self.side_size + self.b + self.c
@@ -122,7 +122,7 @@ class Trapezoid(Shape):
         self.b = b
         self.c = c
         self.d = d
-        self.h = (((self.side_size - self.b)**2 - self.d**2 + self.c**2) / (2 * (a - b)))
+        self.h = (((self.side_size - self.b) ** 2 - self.d ** 2 + self.c ** 2) / (2 * (a - b)))
 
     @staticmethod
     def get_title() -> str:
@@ -141,7 +141,7 @@ class Trapezoid(Shape):
         return self.side_size + self.b + self.c + self.d
 
     def get_height(self) -> float:
-        return (self.c**2 - self.h**2)**0.5
+        return (self.c ** 2 - self.h ** 2) ** 0.5
 
 
 class Rhombus(Shape):
@@ -173,6 +173,6 @@ class Rhombus(Shape):
         return 4 * self.side_size
 
     def get_diagonals(self) -> float:
-        diag_1 = self.side_size * (2 + 2 * cos(self.angle))**0.5
-        diag_2 = self.side_size * (2 - 2 * cos(self.other_angle))**0.5
+        diag_1 = self.side_size * (2 + 2 * cos(self.angle)) ** 0.5
+        diag_2 = self.side_size * (2 - 2 * cos(self.other_angle)) ** 0.5
         return diag_1, diag_2
