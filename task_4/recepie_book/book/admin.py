@@ -12,8 +12,10 @@ class RecipieInline(admin.StackedInline):
 
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['author', 'title', 'category', 'create_at', 'id']
+    list_display = ['title', 'author', 'category', 'create_at', 'id']
     inlines = [RecipieInline]  # added possibility to create post + recipie together
+    save_as = True
+    save_on_top = True
 
 
 @admin.register(models.Recipie)

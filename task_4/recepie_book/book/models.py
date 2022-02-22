@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -58,7 +59,7 @@ class Post(models.Model):
     )
     tag = models.ManyToManyField(Tag, related_name='post')
     create_at = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(max_length=150, default="")
+    slug = models.SlugField(max_length=150, default="", unique=True)
 
     def __str__(self):
         return self.title
@@ -80,7 +81,7 @@ class Recipie(models.Model):
     cook_time = models.PositiveIntegerField(default=0)
     # ingredients = models.TextField()  # should be as table, m2m field
     ingredients = models.ManyToManyField(Ingredients, related_name='recipie')
-    instruction = models.TextField()
+    instruction = RichTextField()
     post = models.ForeignKey(
             Post,
             related_name='recipie',
@@ -88,6 +89,20 @@ class Recipie(models.Model):
             null=True,
             blank=True
     )
+
+
+# class Photos(models.Model):
+#     """Photo for recipe"""
+#     title = models.CharField("Title", max_length=300)
+#     image = models.ImageField("Photo", upload_to="recipe_images/")
+#     recipe = models.ForeignKey(
+#         Recipie, verbose_name="Recipe", on_delete=models.CASCADE, related_name="recipe_images"
+#     )
+#
+#     def __str__(self):
+#         return self.title
+
+
 
 # future features
 

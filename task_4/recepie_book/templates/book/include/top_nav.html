@@ -1,0 +1,11 @@
+{% load menu_tags cache %}
+
+{% cache 5000 top_nav %}
+<nav class="header__menu">
+    <ul>
+        <li class="active"><a href="/">Main</a></li>
+        {% get_last_posts %}
+        {% get_categories %}
+    </ul>
+</nav>
+{% endcache %}
