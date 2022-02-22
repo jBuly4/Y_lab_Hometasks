@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from D_figures import Sphere, Cube, Parallelepiped, Pyramid, Cylinder, Cone
+from D_render_results import My_3D_Renderer
 
 btn_names_main = [class_name.get_title() for class_name in [Sphere, Cube, Parallelepiped, Pyramid, Cylinder, Cone]]
 
@@ -41,75 +42,75 @@ class My_3D_GUI(tk.Tk):
 
         btn.bind("<Button-1>", lambda event: self.calculate_n_draw(event, sizes, text, win))
 
-        if text == Sphere.get_title():
-            method_lst = self.get_lst_methods(Sphere)
-            for method in method_lst:
-                lb.insert(indx, method)
-                indx += 1
-
-            label_sizes = tk.Label(frame_2, text=f"Insert radius of {text} ", width=19)
-            label_sizes.pack(side="left", pady=5, padx=5)
-            sizes = tk.Entry(frame_2, width=21)
-            sizes.pack(fill="x", side="left", pady=5, padx=5)
-
-        elif text == Cube.get_title():
-            method_lst = self.get_lst_methods(Cube)
-            for method in method_lst:
-                lb.insert(indx, method)
-                indx += 1
-
-            label_sizes = tk.Label(frame_2, text=f"Insert side of {text} ", width=19)
-            label_sizes.pack(side="left", pady=5, padx=5)
-            sizes = tk.Entry(frame_2, width=21)
-            sizes.pack(fill="x", side="left", pady=5, padx=5)
-
-        elif text == Parallelepiped.get_title():
-            method_lst = self.get_lst_methods(Parallelepiped)
-            for method in method_lst:
-                lb.insert(indx, method)
-                indx += 1
-
-            label_sizes = tk.Label(frame_2, text=f"Insert side 1\n and side 2\nand side 3 of {text}\n with space ",
-                                   width=19)
-            label_sizes.pack(side="left", pady=5, padx=5)
-            sizes = tk.Entry(frame_2, width=21)
-            sizes.pack(fill="x", side="left", pady=5, padx=5)
-
-        elif text == Pyramid.get_title():
-            method_lst = self.get_lst_methods(Pyramid)
-            for method in method_lst:
-                lb.insert(indx, method)
-                indx += 1
-
-            label_sizes = tk.Label(frame_2, text=f"Insert base sides a, b\n and height c of {text}\n with space ",
-                                   width=19)
-            label_sizes.pack(side="left", pady=5, padx=5)
-            sizes = tk.Entry(frame_2, width=21)
-            sizes.pack(fill="x", side="left", pady=5, padx=5)
-
-        elif text == Cylinder.get_title():
-            method_lst = self.get_lst_methods(Cylinder)
-            for method in method_lst:
-                lb.insert(indx, method)
-                indx += 1
-
-            label_sizes = tk.Label(frame_2, text=f"Insert radius a\n and height b of {text}\n with space ",
-                                   width=19)
-            label_sizes.pack(side="left", pady=5, padx=5)
-            sizes = tk.Entry(frame_2, width=21)
-            sizes.pack(fill="x", side="left", pady=5, padx=5)
-
-        elif text == Cone.get_title():
-            method_lst = self.get_lst_methods(Cone)
-            for method in method_lst:
-                lb.insert(indx, method)
-                indx += 1
-
-            label_sizes = tk.Label(frame_2, text=f"Insert radius a\n and height b of {text}\n with space ",
-                                   width=19)
-            label_sizes.pack(side="left", pady=5, padx=5)
-            sizes = tk.Entry(frame_2, width=21)
-            sizes.pack(fill="x", side="left", pady=5, padx=5)
+        # if text == Sphere.get_title():
+        #     method_lst = self.get_lst_methods(Sphere)
+        #     for method in method_lst:
+        #         lb.insert(indx, method)
+        #         indx += 1
+        #
+        #     label_sizes = tk.Label(frame_2, text=f"Insert radius of {text} ", width=19)
+        #     label_sizes.pack(side="left", pady=5, padx=5)
+        #     sizes = tk.Entry(frame_2, width=21)
+        #     sizes.pack(fill="x", side="left", pady=5, padx=5)
+        #
+        # elif text == Cube.get_title():
+        #     method_lst = self.get_lst_methods(Cube)
+        #     for method in method_lst:
+        #         lb.insert(indx, method)
+        #         indx += 1
+        #
+        #     label_sizes = tk.Label(frame_2, text=f"Insert side of {text} ", width=19)
+        #     label_sizes.pack(side="left", pady=5, padx=5)
+        #     sizes = tk.Entry(frame_2, width=21)
+        #     sizes.pack(fill="x", side="left", pady=5, padx=5)
+        #
+        # elif text == Parallelepiped.get_title():
+        #     method_lst = self.get_lst_methods(Parallelepiped)
+        #     for method in method_lst:
+        #         lb.insert(indx, method)
+        #         indx += 1
+        #
+        #     label_sizes = tk.Label(frame_2, text=f"Insert side 1\n and side 2\nand side 3 of {text}\n with space ",
+        #                            width=19)
+        #     label_sizes.pack(side="left", pady=5, padx=5)
+        #     sizes = tk.Entry(frame_2, width=21)
+        #     sizes.pack(fill="x", side="left", pady=5, padx=5)
+        #
+        # elif text == Pyramid.get_title():
+        #     method_lst = self.get_lst_methods(Pyramid)
+        #     for method in method_lst:
+        #         lb.insert(indx, method)
+        #         indx += 1
+        #
+        #     label_sizes = tk.Label(frame_2, text=f"Insert base sides a, b\n and height c of {text}\n with space ",
+        #                            width=19)
+        #     label_sizes.pack(side="left", pady=5, padx=5)
+        #     sizes = tk.Entry(frame_2, width=21)
+        #     sizes.pack(fill="x", side="left", pady=5, padx=5)
+        #
+        # elif text == Cylinder.get_title():
+        #     method_lst = self.get_lst_methods(Cylinder)
+        #     for method in method_lst:
+        #         lb.insert(indx, method)
+        #         indx += 1
+        #
+        #     label_sizes = tk.Label(frame_2, text=f"Insert radius a\n and height b of {text}\n with space ",
+        #                            width=19)
+        #     label_sizes.pack(side="left", pady=5, padx=5)
+        #     sizes = tk.Entry(frame_2, width=21)
+        #     sizes.pack(fill="x", side="left", pady=5, padx=5)
+        #
+        # elif text == Cone.get_title():
+        #     method_lst = self.get_lst_methods(Cone)
+        #     for method in method_lst:
+        #         lb.insert(indx, method)
+        #         indx += 1
+        #
+        #     label_sizes = tk.Label(frame_2, text=f"Insert radius a\n and height b of {text}\n with space ",
+        #                            width=19)
+        #     label_sizes.pack(side="left", pady=5, padx=5)
+        #     sizes = tk.Entry(frame_2, width=21)
+        #     sizes.pack(fill="x", side="left", pady=5, padx=5)
 
     def calculate_n_draw(self, event, sizes, text, win):
         """Make calculations and draw figures."""
