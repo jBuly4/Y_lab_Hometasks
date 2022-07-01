@@ -1,4 +1,4 @@
-# Y-lab_task 1
+# Y-lab_homework 2 task 1
 
 ## Solution idea
 
