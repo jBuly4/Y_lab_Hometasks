@@ -71,8 +71,8 @@ def place_marker(board: List, marker: str, position: int):
 
 def space_check(board, position) -> bool:
     """Returns boolean value whether the cell is free or not."""
-    return board[position].strip() not in PLAYERS_MARKS  # strip is needed because we have string with space +
-    # player_mark
+    return board[position].strip() not in PLAYERS_MARKS  # strip is needed because we have string with 'space +
+    # + player_mark'
 
 
 def check_loose_condition(line: str) -> bool:
@@ -311,12 +311,6 @@ def player_choice(board: List, player_mark: str) -> int:
         except ValueError as exc:
             print(f'Wrong value: {exc}. Please, try again.')
 
-    # position -= 1
-    # if space_check(board, position):
-    #     return position
-    #
-    # return False
-
 
 def replay() -> bool:
     """Asks the players to play again."""
@@ -350,16 +344,11 @@ def main():
 
         if current_player == computer:
             pos_to_place = comp_move()
-            # if space_check(PLAY_BOARD, pos_to_place):
             place_marker(PLAY_BOARD, current_player, pos_to_place)
-            # else:
-            #     continue
         else:
             pos_to_place = player_choice(PLAY_BOARD, current_player)
-            # if space_check(PLAY_BOARD, pos_to_place):
             place_marker(PLAY_BOARD, current_player, pos_to_place)
-            # else:
-            #     continue
+
         last_position = pos_to_place
 
         if winning(PLAY_BOARD, last_position, current_player):
