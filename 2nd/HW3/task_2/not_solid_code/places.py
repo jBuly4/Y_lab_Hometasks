@@ -1,12 +1,22 @@
-class Kostroma:
+from abc import ABC, abstractmethod
+
+
+class Place(ABC):
+
+    @abstractmethod
+    def get_enemy(self):
+        pass
+
+
+class Kostroma(Place):
     city_name = 'Kostroma'
 
-    def get_orcs(self):
-        print('Orcs hid in the forest')
+    def get_enemy(self):
+        print('Orcs hide in the forest')
 
 
-class Tokyo:
+class Tokyo(Place):
     name = 'Tokyo'
 
-    def get_godzilla(self):
+    def get_enemy(self):
         print('Godzilla stands near a skyscraper')

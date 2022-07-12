@@ -7,7 +7,4 @@ class AntagonistFinder:
     # Когда возникнут трудности: Когда ваш проект обретет мировую славу
 
     def get_antagonist(self, place):
-        if isinstance(place, Kostroma):
-            place.get_orcs()
-        elif isinstance(place, Tokyo):
-            place.get_godzilla()
+        place.get_enemy()
