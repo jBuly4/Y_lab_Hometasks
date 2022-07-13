@@ -1,4 +1,29 @@
+from abc import ABC, abstractmethod
 from antagonistfinder import AntagonistFinder
+
+
+class Media(ABC):
+
+    @classmethod
+    @abstractmethod
+    def make_news(cls, place, hero_name):
+        pass
+
+
+class TVMedia:
+
+    @classmethod
+    def make_news(cls, place, hero_name):
+        place_name = getattr(place, 'name', 'place')
+        print(f'Urgent TV News!\n{hero_name} saved the {place_name}!')
+
+
+class PaperMedia:
+
+    @classmethod
+    def make_news(cls, place, hero_name):
+        place_name = getattr(place, 'name', 'place')
+        print(f'PAPER NEWS!\n{hero_name} saved the {place_name} and killed the enemy!')
 
 
 class SuperHero:
@@ -17,8 +42,11 @@ class SuperHero:
     # Когда возникнут трудности? Добавьте оповещение о победе героя через газеты или через TV (на выбор)
     # а также попробуйте оповестить планеты (у которых вместа атрибута name:str используется coordinates:List[float]).
     def create_news(self, place):
-        place_name = getattr(place, 'name', 'place')
-        print(f'{self.name} saved the {place_name}!')
+        # place_name = getattr(place, 'name', 'place')
+        # print(f'{self.name} saved the {place_name}!')
+        TVMedia.make_news(place, self.name)
+        PaperMedia.make_news(place, self.name)
+
 
     # Проблема: Для каждого супергероя реализованы все методы обращения с оружием.
     # Несоблюден: Принцип разделения интерфейса
@@ -38,7 +66,8 @@ class SuperHero:
 
     # Проблема: У разных супергероев разные суперспособности
     # Несоблюден: Принцип открытости/закрытости
-    # По SOLID: Каждого супергероя реализовать как наследника SuperHero и вместо изменения базового класса переопределять нужные методы
+    # По SOLID: Каждого супергероя реализовать как наследника SuperHero и вместо изменения базового класса
+    # переопределять нужные методы
     # Когда возникнут трудности? Когда в вашем коде поселится вся команда Мстителей
     def ultimate(self):
         if self.name == 'Clark Kent':
@@ -50,7 +79,8 @@ class Superman(SuperHero):
     def __init__(self):
         super(Superman, self).__init__('Clark Kent', True)
 
-    # Проблема: Сигнатура метода изменилась. Если мэр города обратится к супермену как к супергерою у Кларка возникнут проблемы с атакой
+    # Проблема: Сигнатура метода изменилась. Если мэр города обратится к супермену как к супергерою у Кларка
+    # возникнут проблемы с атакой
     # Несоблюден: Принцип подстановки Барбары Лисков
     # По SOLID: Не допускать таких вольностей
     # Когда возникнут трудности? При первой же битве
