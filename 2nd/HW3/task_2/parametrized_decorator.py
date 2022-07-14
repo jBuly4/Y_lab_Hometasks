@@ -22,7 +22,7 @@ def decorator(call_count: int, start_sleep_time: int, factor: int, border_sleep_
                     f'{result}.'
                     )
                 time.sleep(time_to_sleep)
-                time_to_sleep *= 2 ** factor
+                time_to_sleep *= factor
                 if time_to_sleep > border_sleep_time:
                     time_to_sleep = border_sleep_time
                 count += 1
@@ -31,7 +31,7 @@ def decorator(call_count: int, start_sleep_time: int, factor: int, border_sleep_
     return outer_wrapper
 
 
-@decorator(6, 2, 1, 20)
+@decorator(6, 1, 2, 20)
 def some_func():
     pass
 
