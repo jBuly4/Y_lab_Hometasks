@@ -49,7 +49,8 @@ def multiplier(number: int):
 - border_sleep_time - граничное время ожидания.
 
 Формула:
-- t = start_sleep_time * 2^(n) if t < border_sleep_time
+- t = start_sleep_time * 2^(n) if t < border_sleep_time - WRONG VERSION
+- t = start_sleep_time * factor^(call_count - 1) if t < border_sleep_time - CORRECT VERSION
 - t = border_sleep_time if t >= border_sleep_time
 
 Ожидаемый результат:
