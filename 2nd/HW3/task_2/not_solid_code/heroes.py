@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from antagonistfinder import AntagonistFinder
-from weapons import GunWeapon, KungFuWeapon
+from weapons import GunWeapon, LaserEyeWeapon, OrdinaryKick, RoundhouseKick
 
 
 class SuperHero(ABC):
@@ -26,18 +26,18 @@ class Superman(SuperHero):
         super(Superman, self).__init__('Clark Kent', True)
 
     def attack(self):
-        KungFuWeapon.superman_kick()
+        OrdinaryKick.kick()
 
     def ultimate(self):
-        print('Wzzzuuuup!')
+        LaserEyeWeapon.incinerate_with_lasers()
 
 
-class ChuckNorris(SuperHero):
+class ChuckNorris(GunWeapon, SuperHero):
     def __init__(self):
         super(ChuckNorris, self).__init__('Chuck Norris', True)
 
     def attack(self):
-        GunWeapon.fire_a_gun()
+        print('Chuck Norris fist punch to enemy chin!')
 
     def ultimate(self):
-        KungFuWeapon.roundhouse_kick()
+        RoundhouseKick.roundhouse_kick()

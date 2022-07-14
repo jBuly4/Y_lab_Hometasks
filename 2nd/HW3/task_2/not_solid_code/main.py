@@ -9,6 +9,10 @@ def save_the_place(hero: SuperHero, place: Union[Kostroma, Tokyo]):
     hero.attack()
     if hero.can_use_ultimate_attack:
         hero.ultimate()
+
+    if hero.name == 'Chuck Norris':
+        hero.fire_a_gun()
+
     TVMedia.make_news(place, hero.name)
     PaperMedia.make_news(place, hero.name)
 

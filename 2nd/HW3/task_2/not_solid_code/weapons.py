@@ -1,15 +1,26 @@
 class GunWeapon:
-    @classmethod
-    def fire_a_gun(cls):
+
+    @staticmethod
+    def fire_a_gun():
         print('PIU!!! PIU!!')
 
 
-class KungFuWeapon:
-    @classmethod
-    def roundhouse_kick(cls):
-        print('Bump!')
+class LaserEyeWeapon:
 
-    @classmethod
-    def superman_kick(cls):
+    @staticmethod
+    def incinerate_with_lasers():
+        print('Wzzzuuuup!')
+
+
+class OrdinaryKick:
+
+    @staticmethod
+    def kick():
         print('Kick!')
 
+
+class RoundhouseKick:
+
+    @staticmethod
+    def roundhouse_kick():
+        print('Bump!')
