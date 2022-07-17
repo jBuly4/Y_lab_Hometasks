@@ -9,7 +9,7 @@ class Media(ABC):
         pass
 
 
-class TVMedia:
+class TVMedia(Media):
 
     @classmethod
     def make_news(cls, place, hero_name):
@@ -20,7 +20,7 @@ class TVMedia:
             print(f'Urgent TV News!\n{hero_name} saved the {place_name}!')
 
 
-class PaperMedia:
+class PaperMedia(Media):
 
     @classmethod
     def make_news(cls, place, hero_name):
